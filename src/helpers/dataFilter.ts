@@ -1,12 +1,11 @@
 import { Item } from "../types/Item";
 
-export const getCurrentMonth = (): string => {
+export const getCurrentMonth = () => {
   let now = new Date();
-
   return `${now.getFullYear()} - ${now.getMonth() + 1}`;
 };
 
-export const filteredListByMonth = (list: Item[], date: string): Item[] => {
+export const filterListByMonth = (list: Item[], date: string): Item[] => {
   let newList: Item[] = [];
   let [year, month] = date.split("-");
 

@@ -3,7 +3,7 @@ import * as C from "./App.styles";
 import { Item } from "./types/Item";
 import { categories } from "./data/categories";
 import { items } from "./data/items";
-import { getCurrentMonth, filteredListByMonth } from "./helpers/dataFilter";
+import { getCurrentMonth, filterListByMonth } from "./helpers/dataFilter";
 import { TableArea } from "./components/TableArea/index";
 import { InfoArea } from "./components/InfoArea/index";
 import { InputArea } from "./components/InputArea/index";
@@ -16,7 +16,7 @@ function App() {
   const [expense, setExpense] = useState(0);
 
   useEffect(() => {
-    setFilteredList(filteredListByMonth(list, currentMonth));
+    setFilteredList(filterListByMonth(list, currentMonth));
   }, [list, currentMonth]);
 
   useEffect(() => {
@@ -41,10 +41,9 @@ function App() {
 
   const handleAddItem = (item: Item) => {
     let newList = [...list];
-    newList.push(item)
-    setList(newList)
+    newList.push(item);
+    setList(newList);
   };
-
   return (
     <C.Container>
       <C.Header>

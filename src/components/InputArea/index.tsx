@@ -24,21 +24,33 @@ export const InputArea = ({ onAdd }: Props) => {
   };
 
   const handleAddEvent = () => {
-    if (!dateField || !titleField || !selectField) {
-      alert("Please, fill in all fields!");
+    let errors: string[] = [];
+
+    if (isNaN(new Date(dateField).getTime())) {
+      errors.push("Data inválida!");
+    }
+    if (!categoryKeys.includes(selectField)) {
+      errors.push("Categoria inválida!");
+    }
+    if (titleField === "") {
+      errors.push("Título vazio!");
+    }
+    if (valueField <= 0) {
+      errors.push("Valor inválido!");
+    }
+
+    if (errors.length > 0) {
+      alert(errors.join("\n"));
     } else {
-      let newItem: Item = {
+      onAdd({
         date: formatNewDate(dateField),
         category: selectField,
         title: titleField,
         value: valueField,
-      };
-
-      onAdd(newItem);
+      });
       clearFields();
     }
   };
-
   return (
     <C.Container>
       <input
